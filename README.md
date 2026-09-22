@@ -1,10 +1,12 @@
 # plugin-generator - java-spring-ops
 
-A generator for your own Claude Code plugin dedicated to the Java/Spring
-Boot + GitLab + GitLab CI + Jira + Docker/Compose + git stack. Instead of
-hand-writing dozens of markdown files, the whole plugin lives in one file,
-`config/plugin.yaml`, and `generate.py` renders a complete plugin repo from
-it into `dist/java-spring-ops/`.
+A generator for your own Claude Code plugins. Instead of hand-writing
+dozens of markdown files, a plugin lives in one file, `config/plugin.yaml`,
+and `generate.py` renders a complete plugin repo from it into `dist/`.
+The example shipped here (`java-spring-ops`) targets the Java/Spring
+Boot + GitLab + GitLab CI + Jira + Docker/Compose + git stack, but the
+same config-driven approach works for any stack - just write your own
+`config/plugin.yaml`.
 
 The full architecture and design decisions are written up in the document
 you received alongside this archive ("Plan and architecture: a custom
