@@ -12,11 +12,23 @@ Claude Code plugin"). This README is just a quick start.
 
 ## Quick start
 
+Requires Python 3.9+.
+
 ```bash
 pip install -r requirements.txt
 python3 generate.py --dry-run   # preview, nothing written
 python3 generate.py             # generates dist/java-spring-ops/
 ```
+
+## Running the tests
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+CI (`.github/workflows/ci.yml`) runs the test suite plus `generate.py
+--dry-run` / `generate.py` on Python 3.9 and 3.12 on every push and PR.
 
 `dist/` is generated output and is git-ignored - it isn't part of this
 repo. Run `python3 generate.py` once after cloning to produce
