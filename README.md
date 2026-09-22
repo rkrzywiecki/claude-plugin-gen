@@ -8,9 +8,6 @@ Boot + GitLab + GitLab CI + Jira + Docker/Compose + git stack, but the
 same config-driven approach works for any stack - just write your own
 `config/plugin.yaml`.
 
-The full architecture and design decisions are written up in the document
-you received alongside this archive ("Plan and architecture: a custom
-Claude Code plugin"). This README is just a quick start.
 
 ## Quick start
 
