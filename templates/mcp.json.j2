@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+{% for m in servers %}
+    "{{ m.id }}": {
+{% if m.type == "http" %}
+      "type": "http",
+      "url": {{ m.url | tojson }}
+{% else %}
+      "command": {{ m.command | tojson }},
+      "args": {{ m.args | tojson }}
+{% endif %}
+    }{% if not loop.last %},{% endif %}
+
+{% endfor %}
+  }
+}

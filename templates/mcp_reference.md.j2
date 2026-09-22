@@ -1,0 +1,40 @@
+# MCP integrations
+
+This plugin defines the MCP servers below in `config/plugin.yaml`. Only
+the ones with `enabled: true` end up in the generated `.mcp.json` (and
+actually connect). The rest are documented here so you can turn them on
+whenever it makes sense (e.g. once you have tokens/OAuth sorted out).
+
+To enable a server: in `config/plugin.yaml`, set `enabled: true` on the
+relevant `mcp_servers` entry, then run `python generate.py --bump patch`.
+
+{% for m in servers %}
+## {{ m.id }} {{ "(ENABLED)" if m.enabled else "(disabled)" }}
+
+{{ m.description }}
+
+```json
+{
+  "mcpServers": {
+    "{{ m.id }}": {
+{% if m.type == "http" %}
+      "type": "http",
+      "url": "{{ m.url }}"
+{% else %}
+      "command": "{{ m.command }}",
+      "args": {{ m.args }}
+{% endif %}
+    }
+  }
+}
+```
+
+{% endfor %}
+## A note on authorization
+
+- **GitLab MCP** — on first connection, the AI client registers itself as
+  an OAuth application on your GitLab instance and receives a token. You
+  don't need to paste a Personal Access Token into the config by hand.
+- **Atlassian (Jira/Confluence) MCP** — the official remote Atlassian
+  server, OAuth 2.1 by default (browser flow on first use). An API token
+  is the alternative for unattended setups / Jira Service Management.

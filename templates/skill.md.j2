@@ -1,0 +1,13 @@
+---
+name: {{ s.id }}
+description: {{ s.description }}
+origin: custom
+---
+
+{% if resources %}
+> **Bundled resources:** this skill ships {{ resources | length }} additional
+> file(s): {{ resources | join(', ') }}. Review them before enabling this
+> plugin in a sensitive environment.
+
+{% endif %}
+{{ s.body }}

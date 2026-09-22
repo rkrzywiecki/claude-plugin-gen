@@ -1,0 +1,21 @@
+{
+  "name": "{{ meta.name }}",
+  "version": "{{ meta.version }}",
+  "description": {{ meta.description | tojson }},
+  "author": {
+    "name": {{ meta.author_name | tojson }}{% if meta.author_email %},
+    "email": {{ meta.author_email | tojson }}{% endif %}
+  },
+  "homepage": {{ meta.homepage | tojson }},
+  "repository": {{ meta.repository | tojson }},
+  "license": {{ meta.license | tojson }},
+  "keywords": {{ meta.keywords | tojson }},
+  "agents": [
+{% for a in agents %}
+    "./agents/{{ a.id }}.md"{% if not loop.last %},{% endif %}
+
+{% endfor %}
+  ],
+  "skills": ["./skills/"],
+  "commands": ["./commands/"]
+}

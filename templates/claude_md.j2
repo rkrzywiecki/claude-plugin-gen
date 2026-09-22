@@ -1,0 +1,36 @@
+# CLAUDE.md
+
+This file is **generated** by `generate.py` from `config/plugin.yaml` in the
+generator repo - don't edit it by hand, changes are lost on the next run.
+Make changes in the generator's config instead.
+
+## About this project
+
+Claude Code plugin `{{ meta.name }}` - {{ meta.description }}
+
+## Architecture
+
+- **agents/** — {{ agents | length }} specialized subagents to delegate tasks to.
+- **skills/** — {{ skills | length }} definitions of procedural knowledge (when and how to do something).
+- **commands/** — {{ commands | length }} slash commands invoked manually by the user.
+- **hooks/** — {{ hooks | length }} automations triggered on tool events (Bash/Write/Edit).
+- **rules/** — {{ rules | length }} always-on guidelines.
+- **.mcp.json / docs/mcp-integrations.md** — GitLab and Jira integrations (optional, disabled by default).
+
+## Agents
+
+{% for a in agents %}
+- `{{ a.id }}` — {{ a.description }}
+{% endfor %}
+
+## Skills
+
+{% for s in skills %}
+- `{{ s.id }}` — {{ s.description }}{% if s.id in skills_with_resources %} _(bundles {{ skills_with_resources[s.id] | length }} extra file(s))_{% endif %}
+{% endfor %}
+
+## Commands
+
+{% for c in commands %}
+- `/{{ c.id }}` — {{ c.description }}
+{% endfor %}

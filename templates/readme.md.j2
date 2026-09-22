@@ -1,0 +1,66 @@
+# {{ meta.name }}
+
+{{ meta.description }}
+
+Auto-generated on {{ generated_on }} (version {{ meta.version }}) - see
+`CHANGELOG.md`. To change what's in this plugin, edit
+`config/plugin.yaml` in the **generator** repo and run `python generate.py`
+again - don't edit files in this directory by hand.
+
+## Installing in Claude Code
+
+By hand (this directory as a local plugin):
+
+```bash
+# inside Claude Code, in any project:
+/plugin marketplace add /path/to/this/directory
+/plugin install {{ meta.name }}@{{ meta.name }}
+```
+
+Or via git, if you push this generated directory to your own repo:
+
+```bash
+/plugin marketplace add https://github.com/<your-user>/{{ meta.name }}
+/plugin install {{ meta.name }}@{{ meta.name }}
+```
+
+Rules (`rules/`) — like in most Claude Code plugins — aren't distributed
+automatically by the plugin system. Copy the contents of `rules/` to
+`~/.claude/rules/` by hand, or add that step to your own install script.
+
+## Contents ({{ agents | length }} agents, {{ skills | length }} skills, {{ commands | length }} commands, {{ hooks | length }} hooks, {{ rules | length }} rules)
+
+### Agents
+
+{% for a in agents %}
+- **{{ a.id }}** — {{ a.description }}
+{% endfor %}
+
+### Skills
+
+{% for s in skills %}
+- **{{ s.id }}** — {{ s.description }}{% if s.id in skills_with_resources %} _(bundles {{ skills_with_resources[s.id] | length }} extra file(s): {{ skills_with_resources[s.id] | join(', ') }})_{% endif %}
+{% endfor %}
+
+### Commands
+
+{% for c in commands %}
+- **/{{ c.id }}** — {{ c.description }}
+{% endfor %}
+
+### Hooks
+
+{% for h in hooks %}
+- **{{ h.id }}** ({{ h.event }}) — {{ h.description }}{% if h.id in hooks_with_resources %} _(bundles {{ hooks_with_resources[h.id] | length }} extra file(s): {{ hooks_with_resources[h.id] | join(', ') }})_{% endif %}
+{% endfor %}
+
+### Rules
+
+{% for r in rules %}
+- **{{ r.id }}** — {{ r.description }}
+{% endfor %}
+
+## MCP integrations
+
+{{ mcp_servers | selectattr("enabled") | list | length }} of {{ mcp_servers | length }} configured MCP servers are enabled.
+Details and ready-to-paste configs (including disabled ones): `docs/mcp-integrations.md`.

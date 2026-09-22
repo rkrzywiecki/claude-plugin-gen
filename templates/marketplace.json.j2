@@ -1,0 +1,22 @@
+{
+  "name": "{{ meta.name }}",
+  "owner": {
+    "name": {{ meta.author_name | tojson }}{% if meta.author_email %},
+    "email": {{ meta.author_email | tojson }}{% endif %}
+  },
+  "metadata": {
+    "description": {{ meta.description | tojson }}
+  },
+  "plugins": [
+    {
+      "name": "{{ meta.name }}",
+      "source": "./",
+      "description": {{ meta.description | tojson }},
+      "version": "{{ meta.version }}",
+      "license": {{ meta.license | tojson }},
+      "keywords": {{ meta.keywords | tojson }},
+      "category": "workflow",
+      "strict": false
+    }
+  ]
+}
